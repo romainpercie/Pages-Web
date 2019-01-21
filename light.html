@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Light display</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  </head>
+  <body onload="document.getElementsByTagName('body')[0].style.display = 'block';" style="display:none;">
+    <div  id ="appLights">
+      <form action ="room.html">
+        <input type="hidden" name="id" v-bind:value="print(room.buildingId)"/>
+        <input type="submit" value="Retour"/>
+      </form>
+      <h3 class="text-center">List of Lights of {{room.name}}</h3>
+         <table class="table">
+           <thead>
+             <tr>
+               <th scope="col">#</th>
+               <th scope="col">Level</th>
+               <th scope="col">Status</th>
+               <th scope="col">Change Status</th>
+               <th></th>
+            </tr>
+           </thead>
+           <tbody>
+             <tr v-for = "light in lights" v-if = "isInRoom(light)">
+                <th>{{light.id}}</th>
+                <td>{{light.level}}</td>
+                <td>{{light.status}}</td>
+                <td>
+                  <button v-on:click ="updatestatus(light.id)">&lt;\&gt;</button>
+                </td>
+                <td>
+                  <button v-on:click ="deletelight(light.id)">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <input v-model="level" placeholder="level">
+                </td>
+                <td>
+                  <input v-model="status" placeholder="status">
+                </td>
+                <td>
+                  <button v-on:click ="addlight(level, status)">+ Add</button>
+                </td>
+                <td/>
+              </tr>
+            </tbody>
+           </table>
+         </div>
+         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"></script>
+         <script src="https://unpkg.com/vue"></script>
+         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+         <script src="js/vue-js/light.js"></script>
+       </body>
+</html>
